@@ -14,12 +14,42 @@ Here are some of the things it needs to do.
 - command propt to issue editing and RECORD commands. 
 - set a FADE TIME on those cues. 
 - execute a 'GO' on the cue stack, transitioning the active channels smoothly from their 'cold' (old) value to their 'hot' (new) value. 
-- GO-TO-CUE...: FADE the live state smoothly to the values of a specified CUE 
+- GO TO CUE...: FADE the live state smoothly to the values of a specified CUE 
 - convert the channel levels to mapped addresses, levels from 0 - 255
 - translate the addresses to dmxAddresses and send them out. 
 - split CUE timing: different UP and DOWN times on CUES. 
 - default programming modes: CUE ONLY / TRACKING (with a TRACK / CUE ONLY flag on the command prompt)
+- relative and absolute effects. 
+- captured channels
 
-## Project Timeline / Structure
+a stream of changes. 
+start value, end value, lenght, and time it started. those are applied to the current cue until all of them are completed. 
+the function that figured out what value a channel should be at only has to look at those change objects. 
+captured channels override all of it. 
+
+when a cue is told to GO, all of the active channels in the cue are added to the stream of changed with the fade time, start time, and end time, taking it's start value from the live state. each change object replaces any change element with the same channel number. 
+
+all the calculation should be done from 0 - 255 for forward compatibily of instrument properties that are 16bit. intensity values should be mapped to 16bit before being saved in the cue, and the live display table should just map them to 0 - 100 before display. 
+
+channels are just streams -> [this seems useful](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
+
+## Structure
+
+### LIVE - LAYERS
+Apply these values in sequence
+- Current Cue
+- [Active Cues]
+- Captured Channels 
+
+#### Current Cue
+the static
+
+## Project Timeline
 
 ### MVP (v0.1)
+
+- LIVE state.
+- edit live state, and record changes into cues
+- GO, and GO TO CUE
+- dmx output
+
