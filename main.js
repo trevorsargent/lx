@@ -45,7 +45,6 @@ const combine = (src, state) => ({ state, next: src })
 
 const tween = (state$) => (source$) =>
 	source$.withLatestFrom(state$, combine)
-		// .do(x => console.log(x))
 		.switchMap(({ state, next }) => {
 			return duration(next.time * 1000)
 				.map(distance(next.value - state))
