@@ -3,6 +3,11 @@ const { Observable, Scheduler, Subject } = require('rxjs/Rx')
 const levelInput = document.getElementById('input-level')
 const outputLevel = document.getElementById('output-level')
 const outputText = document.getElementById('output-text')
+const timeInput = document.getElementById('input-time')
+
+const time$ = Observable.fromEvent(timeInput, 'change')
+	.map(x => x.target.value)
+	.startWith(1)
 
 let state$ = new Subject
 state$.startWith(0)
@@ -32,7 +37,7 @@ const sanitizeLevelInput = x => {
 const commands$ = Observable.fromEvent(levelInput, 'change')
 	.map(x => x.target.value)
 	.map(sanitizeLevelInput)
-	.map(x => ({ value: x, time: 1 }))
+	.withLatestFrom(time$, (level, time) => ({ value: level, time }))
 
 
 
