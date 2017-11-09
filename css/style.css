@@ -1,0 +1,12 @@
+#output{
+	margin: 10px 0;
+	height: 30px;
+	width: 1000px;
+	border: 1px solid lightgray;
+}
+
+#output-level{
+	height: 100%;
+	background: red;
+	width: 0;
+}
