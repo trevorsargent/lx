@@ -32,22 +32,26 @@ const sanitizeLevelInput = x => {
 const commands$ = Observable.fromEvent(levelInput, 'change')
 	.map(x => x.target.value)
 	.map(sanitizeLevelInput)
+	.map(x => ({ value: x, time: 1 }))
+
 
 
 // takes a stream of values to animate to and emits tweened values
-const tween = (ms, state$) => (source$) =>
-	source$.withLatestFrom(state$, (src, ste) => [ste, src])
-		.switchMap(([p, n]) => {
-			const next = Number.parseInt(n)
-			const prev = Number.parseInt(p)
-			return duration(ms)
-				.map(distance(next - prev))
-				.map(v => prev + v)
+
+const combine = (src, state) => ({ state, next: src })
+
+const tween = (state$) => (source$) =>
+	source$.withLatestFrom(state$, combine)
+		// .do(x => console.log(x))
+		.switchMap(({ state, next }) => {
+			return duration(next.time * 1000)
+				.map(distance(next.value - state))
+				.map(v => state + v)
 		}
 		)
 
 const animator = commands$
-	.let(tween(5000, state$.startWith(0)))
+	.let(tween(state$.startWith(0)))
 	.do(x => {
 		outputLevel.style.width = x * 10
 		outputText.innerHTML = x
