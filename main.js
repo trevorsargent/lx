@@ -39,8 +39,6 @@ const commands$ = Observable.fromEvent(levelInput, 'change')
 	.map(sanitizeLevelInput)
 	.withLatestFrom(time$, (level, time) => ({ value: level, time }))
 
-
-
 // takes a stream of values to animate to and emits tweened values
 
 const combine = (src, state) => ({ state, next: src })
