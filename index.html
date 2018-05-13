@@ -1,22 +1,23 @@
 <html>
 
-	<head>
-		<title>LX</title>
-		<link rel="stylesheet" href="./css/style.css">
-	</head>
+  <head>
+    <title>LX</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
 
-	<body>
-		<label>level</label>
-		<input id="input-level" type="number">
-		<label>time</label>
-		<input id="input-time" type="number">
-		<div id="output">
-			<div id="output-level">
-
-			</div>
-		</div>
-		<h1 id="output-text"></h1>
-		<script>require(__dirname + '/main.js')</script>
-	</body>
+  <body>
+    <form id="form">
+      <label>level</label>
+      <input id="input-level" type="number">
+      <label>time</label>
+      <input id="input-time" type="number">
+      <input type="submit" value="">
+    </form>
+    <div id="output">
+      <div id="output-level">
+      </div>
+    </div>
+    <script>require(__dirname + '/main.js')</script>
+  </body>
 
 </html>

@@ -4,6 +4,7 @@
 	"description": "main engine for lx lighting control software",
 	"main": "index.js",
 	"dependencies": {
+		"highland": "^2.13.0",
 		"rxjs-es": "^5.0.0-beta.12"
 	},
 	"devDependencies": {
