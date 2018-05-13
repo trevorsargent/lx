@@ -3,7 +3,6 @@ const T = require('@tweenjs/tween.js')
 
 const makeSetOutputLevel = (channel) => {
   return setOutputLevel = (level) => {
-    console.log(channel, level)
     const bar = document.getElementById('output-level-' + channel)
     bar.style.width = level + "%"
   }
