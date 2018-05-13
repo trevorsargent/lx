@@ -4,8 +4,10 @@
 	"description": "main engine for lx lighting control software",
 	"main": "index.js",
 	"dependencies": {
+		"@tweenjs/tween.js": "^17.2.0",
 		"highland": "^2.13.0",
-		"rxjs-es": "^5.0.0-beta.12"
+		"rxjs-es": "^5.0.0-beta.12",
+		"tweenjs": "^1.0.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.0.0-beta.46",
