@@ -1,37 +1,38 @@
 {
-	"name": "lx",
-	"version": "0.0.1",
-	"description": "main engine for lx lighting control software",
-	"main": "index.js",
-	"dependencies": {
-		"@tweenjs/tween.js": "^17.2.0",
-		"highland": "^2.13.0",
-		"rxjs-es": "^5.0.0-beta.12",
-		"tweenjs": "^1.0.2"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.0.0-beta.46",
-		"@babel/register": "^7.0.0-beta.46",
-		"electron": "^1.8.6",
-		"rxjs": "^5.5.10"
-	},
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "electron ."
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/trevorsargent/lx.git"
-	},
-	"keywords": [
-		"lighting",
-		"open-source",
-		"control"
-	],
-	"author": "Trevor Sargent",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/trevorsargent/lx/issues"
-	},
-	"homepage": "https://github.com/trevorsargent/lx#readme"
+  "name": "lx",
+  "version": "0.0.1",
+  "description": "main engine for lx lighting control software",
+  "main": "index.js",
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.2.0",
+    "highland": "^2.13.0",
+    "rxjs-es": "^5.0.0-beta.12",
+    "tweenjs": "^1.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/register": "^7.0.0-beta.46",
+    "electron": "^1.8.6",
+    "electron-prebuilt-compile": "^2.0.0",
+    "rxjs": "^5.5.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trevorsargent/lx.git"
+  },
+  "keywords": [
+    "lighting",
+    "open-source",
+    "control"
+  ],
+  "author": "Trevor Sargent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trevorsargent/lx/issues"
+  },
+  "homepage": "https://github.com/trevorsargent/lx#readme"
 }
