@@ -1,7 +1,5 @@
 import { fadeValue } from './animation.js'
-
-
-import { keys } from './keyboard.js'
+import { command } from './input.js'
 import './setup.js'
 
 const makeSetOutputLevel = (channel) => {
@@ -11,4 +9,4 @@ const makeSetOutputLevel = (channel) => {
   }
 }
 
-keys.each(console.log)
+command.each(console.log)
