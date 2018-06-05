@@ -9,4 +9,4 @@ const makeSetOutputLevel = (channel) => {
   }
 }
 
-command.each(console.log)
+command.resume()

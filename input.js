@@ -1,10 +1,9 @@
 import _ from "highland";
 import keyboard from './keyboard.js'
-import { keyTypes, commandTypes, commandSubjects, chunkTypes } from './types.js'
+import { keyTypes, commandTypes, commandSubjects } from './types.js'
 import keys from './keys.json'
 import { keyCompare } from './keyTools.js'
-import { error } from "util";
-
+import { setCommandLineText } from './gui.js'
 
 
 const processKey = (prev, a) => {
@@ -17,7 +16,6 @@ const processKey = (prev, a) => {
 }
 
 const input = keyboard.scan([], processKey)
-
 
 const makeDefaultCommand = () => {
   return {
@@ -43,7 +41,7 @@ const assembleCommand = x => {
     }
 
     // deal with collections
-    if (a.type === keyTypes.COLLECTION) {
+    if (a.type === keyTypes.COLLECTION && command.subject === commandSubjects.UNSET) {
       if (keyCompare(a, keys.CHANNEL)) {
         command.subject = commandSubjects.CHANNEL
       }
@@ -70,4 +68,18 @@ const concat = (a, b) => {
   return a + b + ""
 }
 
+const makeCommandString = x => {
+  let toReturn = ""
+  if (x.subject === commandSubjects.CHANNEL) toReturn += "Channel "
+  else if (x.subject === commandSubjects.ADDRESS) toReturn += "Address "
+  else if (x.subject === commandSubjects.SUBMASTER) toReturn += "Submaster "
+
+  x.collection.forEach(e => {
+    toReturn += (e + " ")
+  })
+  return toReturn;
+}
+
 export const command = input.map(assembleCommand);
+
+command.observe().map(makeCommandString).each(setCommandLineText)
