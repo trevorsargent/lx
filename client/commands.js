@@ -1,6 +1,6 @@
-import { keyTypes, commandTypes, commandSubjects } from './types.js'
-import { keyCompare } from './keyTools.js'
-import keys from './keys.json'
+import { keyTypes, commandTypes, commandSubjects } from './config/types.js'
+import { keyCompare } from '../lib/keyTools.js'
+import keys from './config/keys.json'
 
 const describeCommand = (x) => {
   let toReturn = ""

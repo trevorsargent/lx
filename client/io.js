@@ -1,4 +1,4 @@
-import { keyTypes } from './types.js'
+import { keyTypes } from './config/types.js'
 
 const commandLine = document.getElementById('command-line')
 

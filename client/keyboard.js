@@ -1,7 +1,7 @@
 import _ from "highland";
-import { keyTypes } from './types.js'
-import keys from './keys.json'
-import { keyCompare } from './keyTools.js'
+import { keyTypes } from './config/types.js'
+import keys from './config/keys.json'
+import { keyCompare } from '../lib/keyTools.js'
 
 
 

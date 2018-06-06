@@ -1,5 +1,5 @@
 const T = require('@tweenjs/tween.js')
-import { setupChannels } from './channel-tools.js'
+import { setupChannels } from '/lib/channel-tools.js'
 
 
 // START ANIMATION ENGINE 
