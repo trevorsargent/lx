@@ -1,13 +1,21 @@
 import _ from 'highland'
 
-let commandStreams = _();
+const commandStreams = _();
 
-let allCommands = commandStreams.merge();
-
-const registerCommandStream = stream => commandStreams.write(stream)
+const allCommands = commandStreams.merge();
 
 const commandStrings = allCommands.observe().map(x => x.toString(x))
-allCommands.resume();
+const registerCommandStream = stream => commandStreams.write(stream)
+
+const filterIncompleteCommands = x => x.complete
+
+const executeCommand = x => {
+  console.log(x)
+}
+
+allCommands
+  .filter(filterIncompleteCommands)
+  .each(executeCommand)
 
 export default {
   registerCommandStream,

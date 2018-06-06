@@ -5,7 +5,14 @@ export const keyTypes = {
   ARROW: Symbol('arrow'),
   BACKSPACE: Symbol('backspace'),
   COLLECTION: Symbol('collection'),
-  COLLECTION_MODIFIER: Symbol('collection-modifier')
+  COLLECTION_MODIFIER: Symbol('collection-modifier'),
+  ENTER: Symbol('enter'),
+  ACTION: Symbol('action')
+}
+
+export const actions = {
+  UNSET: Symbol('unset'),
+  AT: Symbol('at')
 }
 
 export const commandSubjects = {

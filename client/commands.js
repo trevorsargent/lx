@@ -1,4 +1,4 @@
-import { keyTypes, commandTypes, commandSubjects } from './config/types.js'
+import { keyTypes, commandTypes, commandSubjects, actions } from './config/types.js'
 import { keyCompare } from '../lib/keyTools.js'
 import keys from './config/keys.json'
 
@@ -9,9 +9,25 @@ const describeCommand = (x) => {
   else if (x.subject === commandSubjects.ADDRESS) toReturn += "Address "
   else if (x.subject === commandSubjects.SUBMASTER) toReturn += "Submaster "
 
-  x.collection.forEach(e => {
-    toReturn += (e + " ")
+  x.collection.forEach((e, i) => {
+    if (i != 0) {
+      toReturn += " + "
+    }
+    toReturn += (e)
+
   })
+
+  toReturn += " "
+
+  if (x.action === actions.AT) toReturn += "@ "
+
+  if (x.action != actions.UNSET) {
+    toReturn += x.targetValue
+  }
+
+  if (x.complete) {
+    toReturn += "•"
+  }
   return toReturn;
 }
 
@@ -19,9 +35,11 @@ const makeDefaultCommand = () => {
   return {
     subject: commandSubjects.UNSET,
     type: commandTypes.UNSET,
+    action: actions.UNSET,
     collection: [""],
     time: 0,
-    targetValue: -1,
+    targetValue: "",
+    complete: false,
     toString: describeCommand
   }
 }
@@ -35,7 +53,13 @@ const assembleCommand = x => {
       if (command.subject === commandSubjects.UNSET) {
         command.subject = commandSubjects.CHANNEL;
       }
-      command.collection[command.collection.length - 1] += a.key
+      if (command.action === actions.UNSET) {
+        command.collection[command.collection.length - 1] += a.key
+      }
+
+      if (command.action === actions.AT) {
+        command.targetValue += a.key
+      }
     }
 
     // deal with collections
@@ -55,8 +79,18 @@ const assembleCommand = x => {
     }
 
     // deal with actions
+    if (a.type === keyTypes.ACTION) {
+      if (keyCompare(a, keys.AT)) {
+        command.action = actions.AT
+      }
+    }
     // deal with parameters
+    // handle complete case
+    if (a.type === keyTypes.ENTER) {
+      command.complete = true
+    }
   }
+
 
   return command
 
