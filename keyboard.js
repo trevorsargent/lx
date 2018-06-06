@@ -75,11 +75,7 @@ const presses = _()
 const up = _()
   .filter(filterKeyUp)
 
-
 window.onkeypress = e => presses.write(e)
 window.onkeyup = e => up.write(e)
 
-const keyboard = _([presses, up]).merge().map(extractKeyInfo)
-
-
-export default keyboard;
+export const keyboard = _([presses, up]).merge().map(extractKeyInfo)

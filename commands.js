@@ -1,21 +1,19 @@
-import _ from "highland";
-import keyboard from './keyboard.js'
 import { keyTypes, commandTypes, commandSubjects } from './types.js'
-import keys from './keys.json'
 import { keyCompare } from './keyTools.js'
-import { setCommandLineText } from './gui.js'
+import keys from './keys.json'
 
+const describeCommand = (x) => {
+  let toReturn = ""
 
-const processKey = (prev, a) => {
-  if (a.type === keyTypes.BACKSPACE) {
-    prev = prev.slice(0, prev.length - 1);
-    return prev;
-  }
-  prev.push(a)
-  return prev
+  if (x.subject === commandSubjects.CHANNEL) toReturn += "Channel "
+  else if (x.subject === commandSubjects.ADDRESS) toReturn += "Address "
+  else if (x.subject === commandSubjects.SUBMASTER) toReturn += "Submaster "
+
+  x.collection.forEach(e => {
+    toReturn += (e + " ")
+  })
+  return toReturn;
 }
-
-const input = keyboard.scan([], processKey)
 
 const makeDefaultCommand = () => {
   return {
@@ -24,7 +22,7 @@ const makeDefaultCommand = () => {
     collection: [""],
     time: 0,
     targetValue: -1,
-    toString: () => { return }
+    toString: describeCommand
   }
 }
 
@@ -64,22 +62,6 @@ const assembleCommand = x => {
 
 }
 
-const concat = (a, b) => {
-  return a + b + ""
-}
+export const buildCommands = input => input.map(assembleCommand)
 
-const makeCommandString = x => {
-  let toReturn = ""
-  if (x.subject === commandSubjects.CHANNEL) toReturn += "Channel "
-  else if (x.subject === commandSubjects.ADDRESS) toReturn += "Address "
-  else if (x.subject === commandSubjects.SUBMASTER) toReturn += "Submaster "
 
-  x.collection.forEach(e => {
-    toReturn += (e + " ")
-  })
-  return toReturn;
-}
-
-export const command = input.map(assembleCommand);
-
-command.observe().map(makeCommandString).each(setCommandLineText)
