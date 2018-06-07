@@ -76,10 +76,16 @@ const setCommandLineText = (text) => {
 }
 
 const processKey = (prev, a) => {
+
+  if (prev.length > 0 && prev[prev.length - 1].type === keyTypes.ENTER) {
+    prev = []
+  }
+
   if (a.type === keyTypes.BACKSPACE) {
     prev = prev.slice(0, prev.length - 1);
     return prev;
   }
+
   prev.push(a)
   return prev
 }
@@ -88,7 +94,6 @@ const processKey = (prev, a) => {
 const processKeystrokes = keyboard => {
   return keyboard
     .map(extractKeyInfo)
-
     .scan([], processKey)
 }
 
