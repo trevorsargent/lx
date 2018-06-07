@@ -47,6 +47,7 @@ const makeDefaultCommand = () => {
 const assembleCommand = x => {
 
   let command = makeDefaultCommand();
+
   for (let a of x) {
     // deal with digits
     if (a.type === keyTypes.DIGIT) {
@@ -85,6 +86,7 @@ const assembleCommand = x => {
       }
     }
     // deal with parameters
+
     // handle complete case
     if (a.type === keyTypes.ENTER) {
       command.complete = true
@@ -96,6 +98,11 @@ const assembleCommand = x => {
 
 }
 
-export const buildCommands = input => input.map(assembleCommand)
+const buildCommands = input => input.map(assembleCommand)
+
+export default {
+  buildCommands
+}
+
 
 

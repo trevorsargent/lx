@@ -1,12 +1,11 @@
+import _ from "highland";
 import { keyTypes } from './config/types.js'
 import keys from './config/keys.json'
 import { keyCompare } from '../lib/keyTools.js'
 
 const commandLine = document.getElementById('command-line')
 
-
-
-const extractKeyValue = e => {
+const cleanKeyCode = e => {
 
   return e
     .replace("Key", "")
@@ -16,7 +15,7 @@ const extractKeyValue = e => {
 
 }
 
-const extractKeyType = e => {
+const getKeyType = e => {
   if (e.indexOf("Digit") > -1) {
     return keyTypes.DIGIT
   }
@@ -60,10 +59,10 @@ const applyKeyTypes = (e) => {
   return e
 }
 
-const extractKeyInfo = ({ code, altKey, ctrlKey, shiftKey }) => {
+const extractAndApplyKeyInfo = ({ code, altKey, ctrlKey, shiftKey }) => {
   const newKey = {
-    key: extractKeyValue(code),
-    type: extractKeyType(code),
+    key: cleanKeyCode(code),
+    type: getKeyType(code),
     alt: altKey,
     ctrl: ctrlKey,
     shift: shiftKey
@@ -75,7 +74,7 @@ const setCommandLineText = (text) => {
   commandLine.innerText = text
 }
 
-const processKey = (prev, a) => {
+const handleInput = (prev, a) => {
 
   if (prev.length > 0 && prev[prev.length - 1].type === keyTypes.ENTER) {
     prev = []
@@ -91,13 +90,13 @@ const processKey = (prev, a) => {
 }
 
 
-const processKeystrokes = keyboard => {
+const handleAndTypeInput = keyboard => {
   return keyboard
-    .map(extractKeyInfo)
-    .scan([], processKey)
+    .map(extractAndApplyKeyInfo)
+    .scan([], handleInput)
 }
 
 export default {
-  processKeystrokes,
+  handleAndTypeInput,
   setCommandLineText
 }

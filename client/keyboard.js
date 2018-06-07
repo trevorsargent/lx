@@ -1,6 +1,4 @@
-import _ from "highland";
-
-
+import _ from 'highland'
 
 
 const filterKeyUp = ({ key }) => {
@@ -11,7 +9,6 @@ const filterKeyUp = ({ key }) => {
     || key === "Tab"
     || key.indexOf("Arrow") > -1
     || key.match(/F\d/)
-
 }
 
 const presses = _()
