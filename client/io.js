@@ -89,14 +89,19 @@ const handleInput = (prev, a) => {
   return prev
 }
 
-
 const handleAndTypeInput = keyboard => {
   return keyboard
     .map(extractAndApplyKeyInfo)
     .scan([], handleInput)
 }
 
+const updateDisplay = (change) => {
+  const channelDisplay = document.getElementById(`output-level-${change.channel}`)
+  channelDisplay.style.width = change.value + '%'
+}
+
 export default {
   handleAndTypeInput,
-  setCommandLineText
+  setCommandLineText,
+  updateDisplay
 }

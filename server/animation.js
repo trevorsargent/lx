@@ -5,8 +5,12 @@ export const fadeValue = (channel, target, time, outputFunc) => {
     .to({
       value: target
     }, time * 1000)
-    .onUpdate((() => {
+    .onUpdate(() => {
       outputFunc(channel.value)
-    }))
+    })
     .start();
+}
+
+export default {
+  fadeValue
 }
